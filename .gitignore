@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+
+# virtual environments
+venv/
+env/
+.venv/
+
+# large data/model files
+*.npy
+*.npz
+*.pt
+*.pth
+*.h5
+*.xdmf
+*.pvd
+*.vtu
+
+# training outputs
+train/
+logs/
+results/
+data/P1/train/*.out
