@@ -110,7 +110,24 @@ python3 -u FEONet_1D_new.py test --seed 0 --gpu 0 --equation inputcoeff --file 1
 After training, run the plotting script:
 
 ```bash
-python3 plot_results.py
+plot_inputcoeff_new.ipynb
+```
+
+
+## Citation
+
+If you use this code, please cite the following paper:
+
+```bibtex
+@misc{chawla2026dgfeonet,
+  title        = {Discontinuous Galerkin Finite Element Operator Network for Solving Non-Smooth PDEs},
+  author       = {Chawla, Kapil and Hong, Youngjoon and Lee, Jae Yong and Lee, Sanghyun},
+  year         = {2026},
+  eprint       = {2601.03668},
+  archivePrefix = {arXiv},
+  primaryClass = {math.NA},
+  url          = {https://arxiv.org/abs/2601.03668}
+}
 ```
 
 ## Notes
