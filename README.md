@@ -10,8 +10,12 @@ In the folder `"1D_random_discontinuity"`:
 
 This example solves the one-dimensional convection-diffusion-reaction problem
 
-$$-\frac{d}{dx}\left(\varepsilon(x)\frac{du}{dx}\right)+ b\frac{du}{dx}+ c(x)u
-=f(x),\quad x\in (-1,1),$$
+$$
+-\frac{d}{dx}\left(\varepsilon(x)\frac{du}{dx}\right)+ b\frac{du}{dx}+ c(x)u
+=
+f(x),
+\quad x\in (-1,1),
+$$
 
 with homogeneous Dirichlet boundary conditions
 
@@ -64,9 +68,19 @@ $$
 \end{cases}
 $$
 
-The discontinuity locations \(x_0\) and \(x_1\) are randomly selected from the mesh element boundaries.
+The discontinuity locations $x_0$ and $x_1$ are randomly selected.
 
-### Step1 - Generate and save the exact DG data
+### Step1 - Assemble and save the DG matrices
+
+To assemble the DG finite element matrices, use the FEniCS-based file:
+
+```bash
+jupyter notebook FEniCS_assemble.ipynb
+```
+
+This step constructs the one-dimensional DG mesh, basis information, stiffness matrices, convection matrix, reaction matrix structure, and load-vector used in the data generation step.
+
+### Step2 - Generate and save the exact DG data
 
 To generate the training data, use
 
@@ -80,7 +94,9 @@ To generate the validation data, use
 python3 create_data_exact_new.py --equation inputcoeff --num_data 1000 --file 1000N32_inputcoeff --basis_order 1 --kind validate
 ```
 
-### Step2 - Save the train and validation data by interpolation
+This step generates the exact DG data for the 1D randomly located discontinuity problem.
+
+### Step3 - Save the train and validation data by interpolation
 
 Using the `create_data_interpol_new.py` code, generate the interpolated training data by
 
@@ -94,9 +110,8 @@ Generate the interpolated validation data by
 python3 create_data_interpol_new.py --equation inputcoeff --file 1000N32_inputcoeff --num_data 1000 --basis_order 1 --kind validate --exact 32
 ```
 
-Here, `--exact 32` means that the exact DG data is generated on a mesh with 32 elements.
 
-### Step3 - Train DG-FEONet
+### Step4 - Train DG-FEONet
 
 To train the DG-FEONet model, use
 
@@ -105,14 +120,13 @@ python3 -u FEONet_1D_new.py test --seed 0 --gpu 0 --equation inputcoeff --file 1
 ```
 
 
-### Step4 - Plot the results
+### Step5 - Plot the results
 
-After training, run the plotting script:
+After training, open and run the plotting notebook:
 
 ```bash
-plot_inputcoeff_new.ipynb
+jupyter notebook plot_inputcoeff_new.ipynb
 ```
-
 
 ## Citation
 
@@ -120,13 +134,13 @@ If you use this code, please cite the following paper:
 
 ```bibtex
 @misc{chawla2026dgfeonet,
-  title        = {Discontinuous Galerkin Finite Element Operator Network for Solving Non-Smooth PDEs},
-  author       = {Chawla, Kapil and Hong, Youngjoon and Lee, Jae Yong and Lee, Sanghyun},
-  year         = {2026},
-  eprint       = {2601.03668},
+  title         = {Discontinuous Galerkin Finite Element Operator Network for Solving Non-Smooth PDEs},
+  author        = {Chawla, Kapil and Hong, Youngjoon and Lee, Jae Yong and Lee, Sanghyun},
+  year          = {2026},
+  eprint        = {2601.03668},
   archivePrefix = {arXiv},
-  primaryClass = {math.NA},
-  url          = {https://arxiv.org/abs/2601.03668}
+  primaryClass  = {math.NA},
+  url           = {https://arxiv.org/abs/2601.03668}
 }
 ```
 
