@@ -10,65 +10,65 @@ In the folder `"1D_random_discontinuity"`:
 
 This example solves the one-dimensional convection-diffusion-reaction problem
 
-\[
+$$
 -\frac{d}{dx}\left(\varepsilon(x)\frac{du}{dx}\right)
 + b\frac{du}{dx}
 + c(x)u
 =
 f(x),
 \qquad x\in (-1,1),
-\]
+$$
 
 with homogeneous Dirichlet boundary conditions
 
-\[
+$$
 u(-1)=u(1)=0.
-\]
+$$
 
 The convection coefficient is fixed as
 
-\[
+$$
 b=0.01.
-\]
+$$
 
 The input is the discontinuous reaction coefficient \(c(x)\), defined by
 
-\[
+$$
 c(x)=
 \begin{cases}
 c_0, & x < x_0,\\
 c_1, & x_0 \le x < x_1,\\
 c_2, & x \ge x_1,
 \end{cases}
-\]
+$$
 
 where
 
-\[
+$$
 c_0\in [0,5),\qquad c_1\in [5,10),\qquad c_2\in [10,15].
-\]
+$$
 
 The source term and diffusion coefficient are also piecewise constant on the same subintervals:
 
-\[
+$$
 f(x)=
 \begin{cases}
 1.0, & x < x_0,\\
 -1.5, & x_0 \le x < x_1,\\
 2.5, & x \ge x_1,
 \end{cases}
-\]
+$$
 
 and
 
-\[
+$$
 \varepsilon(x)=
 \begin{cases}
 0.01, & x < x_0,\\
 0.02, & x_0 \le x < x_1,\\
 0.03, & x \ge x_1.
 \end{cases}
-\]
+$$
 
 The discontinuity locations \(x_0\) and \(x_1\) are randomly selected from the mesh element boundaries.
 
