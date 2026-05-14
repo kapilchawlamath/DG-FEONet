@@ -124,7 +124,7 @@ After training, open and run the plotting notebook:
 jupyter notebook plot_inputcoeff_new.ipynb
 ```
 
-# 2D Circle-Hole Discontinuous Diffusion Example
+# 2D Discontinuous Diffusion Example
 This example solves the convection-diffusion problem
 
 $$-\nabla\cdot\left(\varepsilon(\mathbf{x})\nabla u\right)+
@@ -138,18 +138,14 @@ $$
 
 Here,
 
-$$
-\mathbf{b}=(-1,0)^T,
-\qquad
-c=0.
-$$
+$$\mathbf{b}=(-1,0)^T, \quad c=0.$$
 The discontinuous diffusion coefficient is defined by
 
 $$
 \varepsilon(\mathbf{x})=
 \begin{cases}
-\varepsilon_{\mathrm{in}}, & \|\mathbf{x}\|_2 < 0.5,\\
-\varepsilon_{\mathrm{out}}, & \|\mathbf{x}\|_2 \ge 0.5,
+\varepsilon_{\mathrm{in}}, & ||\mathbf{x}||_2 < 0.5,\\
+\varepsilon_{\mathrm{out}}, & ||\mathbf{x}||_2 \ge 0.5,
 \end{cases}
 $$
 
@@ -165,13 +161,7 @@ $$
 
 The source function has the form
 
-$$
-f(\mathbf{x})
-=
-m_0\sin(\mathbf{n}_0\cdot \mathbf{x})
-+
-m_1\cos(\mathbf{n}_1\cdot \mathbf{x}),
-$$
+$$f(\mathbf{x})=m_0\sin(\mathbf{n}_0\cdot \mathbf{x})+m_1\cos(\mathbf{n}_1\cdot \mathbf{x}),$$
 
 
 ## How to run this example
@@ -201,12 +191,6 @@ python3 create_data_interpol.py --type circlehole --num_data 500 --basis_order 1
 ```
 
 ### Step4 - Train DG-FEONet
-
-Before training, create the log folder if it does not already exist:
-
-```bash
-mkdir -p train
-```
 
 Train the DG-FEONet model using
 
