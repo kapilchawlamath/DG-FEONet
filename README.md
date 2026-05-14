@@ -10,9 +10,7 @@ In the folder `"1D_random_discontinuity"`:
 
 This example solves the one-dimensional convection-diffusion-reaction problem
 
-$$-\frac{d}{dx}\left(\varepsilon(x)\frac{du}{dx}\right)+ b\frac{du}{dx}+ c(x)u
-=
-f(x),
+$$-\frac{d}{dx}\left(\varepsilon(x)\frac{du}{dx}\right)+ b\frac{du}{dx}+ c(x)u=f(x),
 \quad x\in (-1,1),$$
 
 with homogeneous Dirichlet boundary conditions
