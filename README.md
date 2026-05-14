@@ -124,6 +124,105 @@ After training, open and run the plotting notebook:
 jupyter notebook plot_inputcoeff_new.ipynb
 ```
 
+# 2D Circle-Hole Discontinuous Diffusion Example
+This example solves the convection-diffusion problem
+
+$$-\nabla\cdot\left(\varepsilon(\mathbf{x})\nabla u\right)+
+\mathbf{b}\cdot\nabla u=f(\mathbf{x}),\qquad \mathbf{x}=(x,y)\in (-1,1)^2,$$
+
+with homogeneous Dirichlet boundary condition
+
+$$
+u=0 \quad \text{on } \partial D.
+$$
+
+Here,
+
+$$
+\mathbf{b}=(-1,0)^T,
+\qquad
+c=0.
+$$
+The discontinuous diffusion coefficient is defined by
+
+$$
+\varepsilon(\mathbf{x})=
+\begin{cases}
+\varepsilon_{\mathrm{in}}, & \|\mathbf{x}\|_2 < 0.5,\\
+\varepsilon_{\mathrm{out}}, & \|\mathbf{x}\|_2 \ge 0.5,
+\end{cases}
+$$
+
+where
+
+$$
+\varepsilon_{\mathrm{in}}=0.1,
+\qquad
+\varepsilon_{\mathrm{out}}=\gamma \varepsilon_{\mathrm{in}},
+\qquad
+\gamma\in\{5,10,20\}.
+$$
+
+The source function has the form
+
+$$
+f(\mathbf{x})
+=
+m_0\sin(\mathbf{n}_0\cdot \mathbf{x})
++
+m_1\cos(\mathbf{n}_1\cdot \mathbf{x}),
+$$
+
+
+## How to run this example
+
+### Step1 - Assemble and save the DG matrices
+
+First, run the FEniCS assembly file:
+
+```bash
+jupyter notebook FEniCS_assemble_2D.ipynb
+```
+
+### Step2 - Generate the interpolated training data
+
+Generate the training data by running
+
+```bash
+python3 create_data_interpol.py --type circlehole --num_data 500 --basis_order 1 --kind train --ne 712 --ne_exact 1964
+```
+
+### Step3 - Generate the interpolated validation data
+
+Generate the validation data by running
+
+```bash
+python3 create_data_interpol.py --type circlehole --num_data 500 --basis_order 1 --kind validate --ne 712 --ne_exact 1964
+```
+
+### Step4 - Train DG-FEONet
+
+Before training, create the log folder if it does not already exist:
+
+```bash
+mkdir -p train
+```
+
+Train the DG-FEONet model using
+
+```bash
+python3 -u FEONet_2D.py test_precond --seed 0 --gpu 2 --type circlehole --num_train_data 500 --num_validate_data 100 --basis_order 1 --ne 712 --model CNN2D --resol_in 60 --blocks 2 --ks 5 --filters 32 --epochs 70000 --do_precond | tee train/log_precond.out
+```
+
+### Step5 - Plot the results
+
+After training, run the plotting notebook or plotting script used for this example.
+
+```bash
+jupyter notebook plot.ipynb
+```
+
+
 ## Citation
 
 If you use this code, please cite the following paper:
