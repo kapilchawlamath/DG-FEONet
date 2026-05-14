@@ -205,7 +205,9 @@ After training, run the plotting notebook or plotting script used for this examp
 ```bash
 jupyter notebook plot.ipynb
 ```
+## Contact
 
+If you have any questions or need additional information, please feel free to contact Kapil Chawla at kapil.chawla28@gmail.com.
 
 ## Citation
 
